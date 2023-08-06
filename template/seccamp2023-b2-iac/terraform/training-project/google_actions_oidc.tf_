@@ -1,7 +1,7 @@
 # You need to modify this value
 locals {
-  app_repo_name = "<github org or name>/devenv-security-app"
-  iac_repo_name = "<github org or name>/devenv-security-iac"
+  app_repo_name = "<github org or name>/seccamp-2023-b2-app"
+  iac_repo_name = "<github org or name>/seccamp-2023-b2-iac"
 }
 
 

@@ -1,4 +1,4 @@
-# devenv-security-rung-application
+# seccamp-2023-b2-app
 - Run on local machine
 ```bash
 $ docker build -t training-helloworld .
