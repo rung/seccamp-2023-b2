@@ -1,77 +1,36 @@
-# Preparation: Setup Google Cloud and GitHub
-- You need to register Google Cloud and GitHub to do this training
-- For the next section, you log-in to each service in this preparation
+# What is this
 
-## Procedure
-### GitHub
-#### Register SSH Key
-- Register your SSH Key
-  - if you don't have it, you can make it via `ssh-keygen -t ed25519`
+このレポジトリはセキュリティ・キャンプ全国大会2023のトレーニング「B2: 開発プロセスを攻撃者の視点で捉える(後半)」の演習の一部です
 
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255148-879c34fd-dd9c-4e75-9ef5-e9d706670b51.png" height="300"> </kbd>
+## 🎫 Requirements for this exercise
+- Google Cloud Account
+  - (We use IAM, small Storage, small GCE instance and Cloud Run only, so free credits are enough)
+- GitHub Account
+  - Free plan users can do most of the exercises
+  - But we try `branch protection,` so Pro plan is recommended
 
-#### gh command
-- Install (CloudShell has `gh` by default)
-  - https://github.com/cli/cli#installation
-- Execute
-```
-$ gh auth login
-? What account do you want to log into? GitHub.com
-? What is your preferred protocol for Git operations? HTTPS
-? How would you like to authenticate GitHub CLI? Login with a web browser
+## 💻 Terminal
+- Mac: Terminal
+- Windows: WSL
 
-! First copy your one-time code: ****-****
-Press Enter to open github.com in your browser...
-```
+- CloudShellでも実行可能です。
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/seccamp-2023-b2)
 
-### Google Cloud
-#### Login from Web Browser
-- https://console.cloud.google.com/
-  - Go to your project, then please access to IAM page under IAM&Admin
-  - You can change access control on the IAM page manually
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255698-635ee497-d216-4e36-a677-ead861a12db7.png" height="200"> </kbd>
+## ✍️ Exercises
+#### Each section has Additional Exercises. You can try them too.
 
-#### Create a Service Account
-- Go to "Service Accounts" page under IAM&Admin
-https://console.cloud.google.com/iam-admin/serviceaccounts
-  - Click "CREATE SERVICE ACCOUNT"
+### [Preparation: Setup Google Cloud and GitHub](0-preparation/README.md)
+- Goal: Log in to each service
 
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255757-93765552-bb01-40ca-bd41-06a546e61b41.png" height="50"> </kbd>
+### [Exercise1: Make and Try continuous deployment and Infrastructure as code](./3-exercise3/README.md)
+- You need to do [Lab Setup](./3-exercise3/lab-setup.md) before this Exercise
+- Goal: Understand the concept of Continuous Deployment and Infrastructure as code(Terraform)
+- Exercise: Modify Go code and see automatic deployment, Add configuration via Terraform
 
-- Input the service account name
-  - Name: training-sa
+### [Exercise2: Attack against CI/CD](./4-exercise4/README.md)
+- Goal: Attack on CI/CD pipelines and understanding the attack surface
+- Exercise: Overwrite source code without any review, Steal secrets from a non-protected branch, Try Supply-Chain attacks via Actions the repository uses
 
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255874-a1ca05c9-b832-4bb0-9d62-aa648b14720c.png" height="400"> </kbd>
-
-
-- Grant [Owner](https://cloud.google.com/iam/docs/understanding-roles#basic-definitions) to the service account
-
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183537330-0ebbcc99-e97b-4eaf-8dc4-bb196ba2bddf.png" height="300"> </kbd>
-
-- Click the service account you created
-
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256014-cd797ee5-bd37-486c-be42-6f2c2553e989.png" height="40"> </kbd>
-
-- Create New Key
-
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256041-1bd3adc2-0679-466b-a694-df90f22b966d.png" height="300"> </kbd>
-
-- Choose JSON type, then download the json
-
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256053-79741e15-73b1-4ac9-b6e1-d2df09af480a.png" height="300"> </kbd>
-
-
-- Confirm the json file you downloaded
-
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256170-73c32efe-290b-4abd-9165-d7077a8a0d35.png" height="300"> </kbd>
-
-
-#### Login via gcloud command
-- Install gcloud command (CloudShell has `gcloud` by default)
-  - https://cloud.google.com/sdk/docs/install
-- login
-```
-$ gcloud auth login
-...
-You are now logged in as [******@*******].
-```
+### [Exercise3: Secure your CI/CD pipeline](./5-exercise5/README.md)
+- Goal: Try to secure CI/CD pipeline from attacks
+- Exercise: Configure Branch Protection, Configure OIDC, then try keyless between GitHub actions and Google Cloud
