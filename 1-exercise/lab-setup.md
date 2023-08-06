@@ -9,15 +9,15 @@ $ git config --global user.name "<Your name>"
 
 - For application
   - Make an empty repository. 
-    - Name: `devenv-security-app`
+    - Name: `seccamp2023-b2-app`
     - Visibility: `Private`
 
 <kbd> <img src="https://user-images.githubusercontent.com/1150301/183316472-fa7ad0f4-a7f5-4907-8232-1d190e8cb889.png" height="300"> </kbd>
 
 
 ```bash
-# Go to "seccamp2022-devenv-security-training"
-$ cd template/devenv-security-app/
+# Go to "seccamp-2023-b2"
+$ cd template/seccamp2023-b2-app/
 $ git init
 $ git add -A
 $ git status
@@ -34,7 +34,7 @@ $ git commit -m "first commit"
  7 files changed, 159 insertions(+)
  create mode 100644 .github/workflows/deploy.yaml
  ...
-$ git remote add origin https://github.com/<Your org or user>/devenv-security-app.git
+$ git remote add origin https://github.com/<Your org or user>/seccamp2023-b2-app.git
 $ git branch -M main
 $ git push -u origin main
 $
@@ -46,15 +46,15 @@ $
 
 - For Infrastructure as Code
   - Make an empty repository.
-    - Name: `devenv-security-iac`
+    - Name: `seccamp2023-b2-iac`
     - Visibility: `Private`
 
 <kbd> <img src="https://user-images.githubusercontent.com/1150301/183316487-f54ea2f8-62e3-405c-a5da-8ce7419b6339.png" height="300"> </kbd>
 
 
 ```
-# Go to "seccamp2022-devenv-security-training"
-$ cd template/devenv-security-iac/
+# Go to Go to "seccamp-2023-b2"
+$ cd template/seccamp2023-b2-iac/
 $ git init
 $ git add -A
 $ git status
@@ -72,7 +72,7 @@ $ git commit -m "first commit"
  10 files changed, 234 insertions(+)
  create mode 100644 .github/workflows/apply.yaml
  ...
-$ git remote add origin https://github.com/<Your org or user>/devenv-security-iac.git
+$ git remote add origin https://github.com/<Your org or user>/seccamp2023-b2-iac.git
 $ git branch -M main
 $ git push -u origin main
 $
@@ -94,23 +94,23 @@ $ cat google_static_key.json
 ```
 
   - Save google_static_key.json to the GitHub
-    - `https://github.com/<Your org or name>/devenv-security-app/settings/secrets/actions`
+    - `https://github.com/<Your org or name>/seccamp2023-b2-app/settings/secrets/actions`
     - KEY_NAME: `GCP_SA_KEY`
     - ![image](https://user-images.githubusercontent.com/1150301/183318694-7b57f92d-f95f-448d-8ec4-534f9a23de82.png)
   - Do same thing to `devenv-security-iac` too
 
 #### Configure google cloud for Terraform (IaC)
 - Create bucket for terraform state file
-  - Bucket Name: `tmp-training-devenv-security-rung(GitHub Name)`
+  - Bucket Name: `tmp-seccamp2023-b2-<GitHub Name>`
 ```
-$ gsutil mb -c Standard -l US --pap enforced -b on gs://tmp-training-devenv-security-<Your GitHub Name>
+$ gsutil mb -c Standard -l US --pap enforced -b on gs://tmp-seccamp2023-b2-<Your GitHub Name>
 ```
 
 #### Modify GitHub repositories
-##### devenv-security-iac/terraform/training-project/
+##### seccamp2023-b2-iac/terraform/training-project/
 - backend.tf
   - Modify `bucket` to correct name you created
-  - `tmp-training-devenv-security-<Your GitHub Name>`
+  - `tmp-seccamp2023-b2-<Your GitHub Name>`
 - variable.tf
   - Change the project name to correct one
 ```
@@ -126,7 +126,7 @@ variable "project" {
 
 
 
-##### devenv-security-app/.github/workflows/deploy.yaml
+##### seccamp2023-b2-app/.github/workflows/deploy.yaml
 - Change this line. (Replace `<Project ID>` to Your Project Name)
 ```
     env:
