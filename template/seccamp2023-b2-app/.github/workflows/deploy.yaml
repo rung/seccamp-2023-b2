@@ -67,4 +67,4 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3.1.1
       - name: Write SBOM to stdout to see the data
-        run: cosign cosign download sbom us-docker.pkg.dev/${{ env.PROJECT_ID }}/training-helloworld/helloworld:${{ github.sha }}
+        run: cosign download sbom us-docker.pkg.dev/${{ env.PROJECT_ID }}/training-helloworld/helloworld:${{ github.sha }}
