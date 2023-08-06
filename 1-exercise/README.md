@@ -22,7 +22,7 @@
   - You can get a URL from the console (Click the name of Cloud Run)
     - `https://training-helloworld-*****.a.run.app`
 - Modify message
-  - https://github.com/rung/training-devenv-security/blob/467bcce6babc26afec22e8549355aab88ea24423/template/devenv-security-app/main.go#L27
+  - https://github.com/rung/training-devenv-security/blob/467bcce6babc26afec22e8549355aab88ea24423/template/seccamp-2023-b2-app/main.go#L27
 
 - Re-Access Cloud Run
   - Confirm an automated deployment

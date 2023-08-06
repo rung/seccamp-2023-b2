@@ -15,20 +15,20 @@
 
 ## Exercises procedure
 ### 1. Configure Branch Protection
-- Target Repository: `devenv-security-iac`
+- Target Repository: `seccamp-2023-b2-iac`
 
 <kbd> <img src="https://user-images.githubusercontent.com/1150301/183426687-624dad37-10ba-44ea-99f3-b82eed42ad2c.png" height="400"> </kbd>
 
 
 ### 2. Configure OIDC, then try keyless between GitHub actions and Google Cloud
-- Target Repository: `devenv-security-iac`
-- Rename `google_actions_oidc.tf_` to `google_actions_oidc.tf` (`devenv-security-iac/terraform/training-project/`)
+- Target Repository: `seccamp-2023-b2-iac`
+- Rename `google_actions_oidc.tf_` to `google_actions_oidc.tf` (`seccamp-2023-b2-iac/terraform/training-project/`)
   - Change these lines. (Replace `<github org or name>` to Your Github Org or Name)
       ```
         # You need to modify this value
         locals {
-          app_repo_name = "<github org or name>/devenv-security-app"
-          iac_repo_name = "<github org or name>/devenv-security-iac"
+          app_repo_name = "<github org or name>/seccamp-2023-b2-app"
+          iac_repo_name = "<github org or name>/seccamp-2023-b2-iac"
         }
       ```
   - It enables Workload Federation
@@ -37,7 +37,7 @@
 
 
 - Modify Iac's Actions Workflows
-  - `devenv-security-iac/.github/workflows/apply.yaml`, `devenv-security-iac/.github/workflows/plan.yaml`
+  - `seccamp-2023-b2-iac/.github/workflows/apply.yaml`, `seccamp-2023-b2-iac/.github/workflows/plan.yaml`
     - Uncomment `id-token: 'write'`
     - Comment out `credentials_json`
     - Uncomment `workload_identity_provider: 'projects/<Project Number>/locations/global/workloadIdentityPools/training-pool/providers/training-provider'`

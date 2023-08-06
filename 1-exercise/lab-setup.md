@@ -97,7 +97,7 @@ $ cat google_static_key.json
     - `https://github.com/<Your org or name>/seccamp2023-b2-app/settings/secrets/actions`
     - KEY_NAME: `GCP_SA_KEY`
     - ![image](https://user-images.githubusercontent.com/1150301/183318694-7b57f92d-f95f-448d-8ec4-534f9a23de82.png)
-  - Do same thing to `devenv-security-iac` too
+  - Do same thing to `seccamp-2023-b2-iac` too
 
 #### Configure google cloud for Terraform (IaC)
 - Create bucket for terraform state file
