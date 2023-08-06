@@ -9,10 +9,10 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.18
+      - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: ^1.18
+          go-version: ^1.20
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
@@ -28,12 +28,16 @@ jobs:
       # id-token: write
     env:
       # You need to modify these values
-      PROJECT_ID: <Project ID>
-      RUN_SA_ID: run-helloworld@<Project ID>.iam.gserviceaccount.com
+      PROJECT_ID: seccamp2023-b4-rung
+      RUN_SA_ID: run-helloworld@seccamp2023-b4-rung.iam.gserviceaccount.com
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-      - name: supplychain attacks (Exercise 4)
+      - name: Setup ko
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20.x'
+      - name: supplychain attacks (Exercise 2)
         uses: ./supplychain
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -47,8 +51,11 @@ jobs:
         run: |-
           # Artifact Registry (Google's container registry) is configured via Terraform
           gcloud auth configure-docker us-docker.pkg.dev --quiet
-          docker build -t "us-docker.pkg.dev/${{ env.PROJECT_ID }}/training-helloworld/helloworld:${{ github.sha }}" ./
-          docker push "us-docker.pkg.dev/${{ env.PROJECT_ID }}/training-helloworld/helloworld:${{ github.sha }}"
+      - uses: ko-build/setup-ko@v0.6
+        env:
+          KO_DOCKER_REPO: us-docker.pkg.dev/${{ env.PROJECT_ID }}/training-helloworld/helloworld
+      - run: |-
+          ko build --bare --tags ${{ github.sha }},latest
       - name: 'Deploy to Cloud Run'
         run: |-
           gcloud run deploy training-helloworld \
