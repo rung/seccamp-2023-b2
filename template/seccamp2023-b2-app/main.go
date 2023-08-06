@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/valyala/fasthttp"
 	"log"
-	"net/http"
 	"os"
 )
 
 func main() {
 	log.Println("Starting server...")
-	http.HandleFunc("/", handler)
+
+	h := requestHandler
 
 	// Cloud Run injects the PORT environment variable into the container.
 	port := os.Getenv("PORT")
@@ -17,17 +18,17 @@ func main() {
 		port = "8080"
 		log.Printf("defaulting to port %s", port)
 	}
-
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
-		log.Fatal(err)
+	if err := fasthttp.ListenAndServe(":"+port, h); err != nil {
+		log.Fatalf("Error in ListenAndServe: %v", err)
 	}
+
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+func requestHandler(ctx *fasthttp.RequestCtx) {
+	fmt.Fprintf(ctx, "Hello World!")
 }
 
-// detected function is detected by linter
+// detected function by linter
 func detected() {
 	_, err := os.Open("test")
 	_, err = os.Open("test2")
