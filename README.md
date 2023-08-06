@@ -1,69 +1,77 @@
-# What is this
+# Preparation: Setup Google Cloud and GitHub
+- You need to register Google Cloud and GitHub to do this training
+- For the next section, you log-in to each service in this preparation
 
-This repository is Hands-on Exercises for "[Dangerous Attack Path: Modern Development Environment Security - Devices and CI/CD pipelines](https://speakerdeck.com/rung/training-devenv-security-en)" at Security Camp (Japan) 2022.  
-This training is created by Hiroki SUEZAWA([@rung](https://twitter.com/rung/)), 
-Author of [Common Threat Matrix for CI/CD Pipeline
-](https://github.com/rung/threat-matrix-cicd) and reviewer of [Top10 CI/CD Security Risks](https://www.cidersecurity.io/top-10-cicd-security-risks/).
+## Procedure
+### GitHub
+#### Register SSH Key
+- Register your SSH Key
+  - if you don't have it, you can make it via `ssh-keygen -t ed25519`
 
-(Japanese: このレポジトリはセキュリティ・キャンプ全国大会2022のトレーニング「[開発環境のセキュリティおよびCI/CDパイプラインのセキュア化](https://speakerdeck.com/rung/training-devenv-security-ja)」の演習です)
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255148-879c34fd-dd9c-4e75-9ef5-e9d706670b51.png" height="300"> </kbd>
 
-## ℹ️ Course Abstract
+#### gh command
+- Install (CloudShell has `gh` by default)
+  - https://github.com/cli/cli#installation
+- Execute
+```
+$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? How would you like to authenticate GitHub CLI? Login with a web browser
 
-Over the past ten years, the development environment in which software is being developed has changed dramatically: with the spread of DevOps culture and the increased use of Cloud infrastructures, and applications are now deployed through CI/CD pipelines. In addition, development is now conducted not only in the office, but also outside the company.
+! First copy your one-time code: ****-****
+Press Enter to open github.com in your browser...
+```
 
-In this training, we will discuss how to attack and secure modern production environments, mainly from the perspective of client-side attacks using malware and supply-chain attacks, and explain comprehensive attack methods and measures, followed by hands-on exercises.
+### Google Cloud
+#### Login from Web Browser
+- https://console.cloud.google.com/
+  - Go to your project, then please access to IAM page under IAM&Admin
+  - You can change access control on the IAM page manually
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255698-635ee497-d216-4e36-a677-ead861a12db7.png" height="200"> </kbd>
 
-In hands-on exercises, You can decrypt your browser's cookie and password, and other credentials. Then you create a new CI/CD pipeline for automated deployment and Infrastructure as Code, attacking and securing them on your hand!
+#### Create a Service Account
+- Go to "Service Accounts" page under IAM&Admin
+https://console.cloud.google.com/iam-admin/serviceaccounts
+  - Click "CREATE SERVICE ACCOUNT"
 
-## 🛑 Disclaimer
-- This repository's purpose is education and security research to cybersecurity and software engineering community.
-- We use GitHub as Source Code Management and Google Cloud as a public cloud in this exercise, but the contents of the slide can apply to others.
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255757-93765552-bb01-40ca-bd41-06a546e61b41.png" height="50"> </kbd>
 
-## 📖 Presentation Slide
-|English|Japanese (日本語)|
-|---|---|
-|[![English](https://user-images.githubusercontent.com/1150301/184302502-b0c6138e-6498-4fc8-ab2d-29ea69d5e05f.png)](https://speakerdeck.com/rung/training-devenv-security-en)|[![Japanese](https://user-images.githubusercontent.com/1150301/184300825-f351f68d-7704-43de-a193-9b7a98b297cb.png)](https://speakerdeck.com/rung/training-devenv-security-ja)|
+- Input the service account name
+  - Name: training-sa
+
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183255874-a1ca05c9-b832-4bb0-9d62-aa648b14720c.png" height="400"> </kbd>
 
 
-## 🎫 Requirements for this exercise
-- Google Cloud Account
-  - (We use IAM, small Storage, small GCE instance and Cloud Run only, so free credits are enough)
-- GitHub Account
-  - Free plan users can do most of the exercises
-  - But we try `branch protection,` so Pro plan is recommended
+- Grant [Owner](https://cloud.google.com/iam/docs/understanding-roles#basic-definitions) to the service account
 
-## 💻 Terminal
-- You can use your Unix-like terminal on your device
-  - Mac: Terminal
-  - Windows: WSL
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183537330-0ebbcc99-e97b-4eaf-8dc4-bb196ba2bddf.png" height="300"> </kbd>
 
-- You can also use Cloud Shell for this exercise
+- Click the service account you created
 
-[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/seccamp2022-devenv-security-training)
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256014-cd797ee5-bd37-486c-be42-6f2c2553e989.png" height="40"> </kbd>
 
-## ✍️ Exercises
-#### Each section has Additional Exercises. You can try them too.
+- Create New Key
 
-### [Preparation: Setup Google Cloud and GitHub](0-preparation/README.md)
-- Goal: Log in to each service
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256041-1bd3adc2-0679-466b-a694-df90f22b966d.png" height="300"> </kbd>
 
-### [Exercise1: What credentials your PC has](./1-exercise1/README.md)
-- Goal: Understand what credentials your PC has
-- Exercises: Investigate Chrome's profile(e.g. decrypt Cookie), Check GitHub's credentials, Check Google Cloud's credentials, Check SSH Key
+- Choose JSON type, then download the json
 
-### [Exercise 2: Try to secure your token](./2-exercise2/README.md)
-- Goal: Try some mitigation methods from the slide
-- Exercise: Try Webauthn, Try Keyless (within Cloud), Assign temporary role via IAM Condition on Google Cloud, Try Least Privilege on Google Cloud, 
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256053-79741e15-73b1-4ac9-b6e1-d2df09af480a.png" height="300"> </kbd>
 
-### [Exercise3: Make and Try continuous deployment and Infrastructure as code](./3-exercise3/README.md)
-- You need to do [Lab Setup](./3-exercise3/lab-setup.md) before this Exercise
-- Goal: Understand the concept of Continuous Deployment and Infrastructure as code(Terraform)
-- Exercise: Modify Go code and see automatic deployment, Add configuration via Terraform
 
-### [Exercise4: Attack against CI/CD](./4-exercise4/README.md)
-- Goal: Attack on CI/CD pipelines and understanding the attack surface
-- Exercise: Overwrite source code without any review, Steal secrets from a non-protected branch, Try Supply-Chain attacks via Actions the repository uses
+- Confirm the json file you downloaded
 
-### [Exercise5: Secure your CI/CD pipeline](./5-exercise5/README.md)
-- Goal: Try to secure CI/CD pipeline from attacks
-- Exercise: Configure Branch Protection, Configure OIDC, then try keyless between GitHub actions and Google Cloud
+<kbd> <img src="https://user-images.githubusercontent.com/1150301/183256170-73c32efe-290b-4abd-9165-d7077a8a0d35.png" height="300"> </kbd>
+
+
+#### Login via gcloud command
+- Install gcloud command (CloudShell has `gcloud` by default)
+  - https://cloud.google.com/sdk/docs/install
+- login
+```
+$ gcloud auth login
+...
+You are now logged in as [******@*******].
+```
