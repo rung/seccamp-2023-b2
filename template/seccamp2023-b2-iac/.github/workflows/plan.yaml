@@ -38,7 +38,7 @@ jobs:
           mv /tmp/provider-bin/terraform-provider-google* /tmp/plugins/registry.terraform.io/hashicorp/google/${{ env.provider_version }}/linux_amd64/terraform-provider-google
           chmod +x /tmp/plugins/registry.terraform.io/hashicorp/google/${{ env.provider_version }}/linux_amd64/terraform-provider-google
           ls -l /tmp/plugins/registry.terraform.io/hashicorp/google/${{ env.provider_version }}/linux_amd64/terraform-provider-google
-      - uses: hashicorp/setup-terraform@v1
+      - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.4
       - name: Terraform fmt

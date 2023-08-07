@@ -28,8 +28,8 @@ jobs:
       # id-token: write
     env:
       # You need to modify these values
-      PROJECT_ID: seccamp2023-b4-rung
-      RUN_SA_ID: run-helloworld@seccamp2023-b4-rung.iam.gserviceaccount.com
+      PROJECT_ID: <Project ID>
+      RUN_SA_ID: run-helloworld@<Project ID>.iam.gserviceaccount.com
     steps:
       - name: Check out code
         uses: actions/checkout@v3
