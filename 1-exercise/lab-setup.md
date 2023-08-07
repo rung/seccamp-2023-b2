@@ -42,9 +42,6 @@ $
 ```
   - Access the repository
 
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183317210-fd66ffac-4204-48d0-b3a8-ab3972cb8bb4.png" height="300"> </kbd>
-
-
 - For Infrastructure as Code
   - Make an empty repository.
     - Name: `seccamp2023-b2-iac`
@@ -79,8 +76,6 @@ $ git push -u origin main
 $
 ```
   - Access the repository
-
-<kbd> <img src="https://user-images.githubusercontent.com/1150301/183317456-72ec6c4d-18cd-4c22-beb1-bc8d9d9cfc42.png" height="300"> </kbd>
 
 #### Configure google cloud and GitHub for automation
 - Google Cloud Configuration
